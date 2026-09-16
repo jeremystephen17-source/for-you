@@ -34,7 +34,7 @@
       position: relative;
     }
 
-    /* Falling Purple Snow / Sparkle Container */
+    /* Falling Purple Snow / Sparkles */
     #snow-container {
       position: fixed;
       top: 0;
@@ -67,7 +67,7 @@
       }
     }
 
-    /* Glow Background Orbs */
+    /* Background Orbs */
     .sparkle {
       position: absolute;
       background: radial-gradient(circle, rgba(244, 114, 182, 0.35) 0%, rgba(0,0,0,0) 70%);
@@ -98,19 +98,6 @@
       text-align: center;
       z-index: 1;
       position: relative;
-    }
-
-    .kuromi-badge {
-      display: inline-block;
-      background: var(--kuromi-pink);
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      margin-bottom: 10px;
-      box-shadow: 0 0 12px var(--kuromi-pink);
     }
 
     h1.title {
@@ -276,14 +263,12 @@
 </head>
 <body>
 
-  <!-- Falling Snow Element -->
   <div id="snow-container"></div>
 
   <div class="sparkle sp-1"></div>
   <div class="sparkle sp-2"></div>
 
   <div class="container">
-    <div class="kuromi-badge">KUROMI VIBES 💀💜</div>
     <h1 class="title">Hi my baby shobe ✨</h1>
     <p class="subtitle">Happy 5th Monthsary My Love!!! 🖤</p>
 
@@ -306,22 +291,22 @@
       </p>
     </div>
 
-    <!-- Memory Gallery Section -->
+    <!-- Gallery Section using exact image filenames & simple photo1... fallback -->
     <div class="section-title">
       <span>Our Cute Moments</span> 🖤📸✨
     </div>
 
     <div class="gallery">
-      <div class="memory-card"><img src="photo1.jpg" data-name="photo1" alt="Photo 1"></div>
-      <div class="memory-card"><img src="photo2.jpg" data-name="photo2" alt="Photo 2"></div>
-      <div class="memory-card"><img src="photo3.jpg" data-name="photo3" alt="Photo 3"></div>
-      <div class="memory-card"><img src="photo4.jpg" data-name="photo4" alt="Photo 4"></div>
-      <div class="memory-card"><img src="photo5.jpg" data-name="photo5" alt="Photo 5"></div>
-      <div class="memory-card"><img src="photo6.jpg" data-name="photo6" alt="Photo 6"></div>
-      <div class="memory-card"><img src="photo7.jpg" data-name="photo7" alt="Photo 7"></div>
-      <div class="memory-card"><img src="photo8.jpg" data-name="photo8" alt="Photo 8"></div>
-      <div class="memory-card"><img src="photo9.jpg" data-name="photo9" alt="Photo 9"></div>
-      <div class="memory-card"><img src="photo10.jpg" data-name="photo10" alt="Photo 10"></div>
+      <div class="memory-card"><img src="19e44c68-630c-4837-9a37-14dfc7f967db.jpg" alt="Photo 1"></div>
+      <div class="memory-card"><img src="40da9cf9-076f-48c0-82c2-01337c6fa660.jpg" alt="Photo 2"></div>
+      <div class="memory-card"><img src="5489d26b-4f38-4d7e-bafa-49961552531e.jpg" alt="Photo 3"></div>
+      <div class="memory-card"><img src="7920776703_10006853131_1775819140472.jpg" alt="Photo 4"></div>
+      <div class="memory-card"><img src="86e0c11b-4d38-4b3f-b91f-6f4f8a252576.jpg" alt="Photo 5"></div>
+      <div class="memory-card"><img src="IMG_20260613_032549_962.jpg" alt="Photo 6"></div>
+      <div class="memory-card"><img src="befd75e1-d96a-46f8-a089-7b2820b3978e.jpg" alt="Photo 7"></div>
+      <div class="memory-card"><img src="c62e2f0b-11f4-4232-a7a6-0c618d680610.jpg" alt="Photo 8"></div>
+      <div class="memory-card"><img src="d937a043-f1b3-45df-a94d-08027779e53a.jpg" alt="Photo 9"></div>
+      <div class="memory-card"><img src="image.png" alt="Photo 10"></div>
     </div>
   </div>
 
@@ -337,7 +322,6 @@
   </div>
 
   <script>
-    // Toggle Functions
     function toggleLetter() {
       const box = document.getElementById('letterBox');
       box.style.display = (box.style.display === 'block') ? 'none' : 'block';
@@ -351,7 +335,7 @@
       document.getElementById('secretModal').style.display = 'none';
     }
 
-    // Purple Heart/Snow Effect Generator
+    // Snow animation script
     const snowContainer = document.getElementById('snow-container');
     const symbols = ['💜', '✨', '🌸', '❄️', '💀', '💖'];
 
@@ -372,30 +356,16 @@
 
     setInterval(createSnowflake, 300);
 
-    // Automatic Image Extension Fallback Script
-    const originalNames = [
-      "19e44c68-630c-4837-9a37-14dfc7f967db.jpg",
-      "40da9cf9-076f-48c0-82c2-01337c6fa660.jpg",
-      "5489d26b-4f38-4d7e-bafa-49961552531e.jpg",
-      "7920776703_10006853131_1775819140472.jpg",
-      "86e0c11b-4d38-4b3f-b91f-6f4f8a252576.jpg",
-      "IMG_20260613_032549_962.jpg",
-      "befd75e1-d96a-46f8-a089-7b2820b3978e.jpg",
-      "c62e2f0b-11f4-4232-a7a6-0c618d680610.jpg",
-      "d937a043-f1b3-45df-a94d-08027779e53a.jpg",
-      "image.png"
+    // Backup loader: If original long filenames fail, automatically try photo1.jpg... photo10.jpg
+    const simpleNames = [
+      'photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg',
+      'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg'
     ];
 
-    document.querySelectorAll('.gallery img').forEach((img, index) => {
-      const extensions = ['.png', '.PNG', '.jpeg', '.JPEG', '.JPG'];
-      let extIndex = 0;
-
+    document.querySelectorAll('.gallery img').forEach((img, i) => {
       img.onerror = function() {
-        if (extIndex < extensions.length) {
-          this.src = img.dataset.name + extensions[extIndex];
-          extIndex++;
-        } else if (originalNames[index]) {
-          this.src = originalNames[index];
+        if (this.src !== simpleNames[i]) {
+          this.src = simpleNames[i];
         }
       };
     });
