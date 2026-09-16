@@ -13,7 +13,7 @@
       --kuromi-pink: #f472b6;
       --kuromi-hotpink: #ff49db;
       --neon-purple: #c084fc;
-      --card-bg: rgba(14, 6, 22, 0.78);
+      --card-bg: rgba(14, 6, 22, 0.82);
     }
 
     * {
@@ -39,69 +39,74 @@
       position: relative;
     }
 
-    /* ANIMATED SELF-DRAWING VINE, FLOWER & HEART BACKGROUND */
-    .bg-animation-container {
+    /* FULLSCREEN FIXED BACKGROUND VINES & LINES */
+    .bg-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
+      z-index: -2;
       pointer-events: none;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 50%, #150624 0%, #05010a 85%);
+      background: radial-gradient(circle at 50% 50%, #170728 0%, #05010a 90%);
     }
 
-    /* Self-drawing path animation */
-    .drawing-path {
+    .neon-vine-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Animated self-drawing neon lines */
+    .draw-line {
       fill: none;
-      stroke-width: 3;
+      stroke-width: 4;
       stroke-linecap: round;
-      stroke-dasharray: 1200;
-      stroke-dashoffset: 1200;
-      animation: drawAndFade 7s ease-in-out infinite;
-      filter: drop-shadow(0 0 10px var(--neon-purple));
+      stroke-dasharray: 1400;
+      stroke-dashoffset: 1400;
+      animation: traceLoop 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    .path-1 { stroke: var(--neon-purple); animation-delay: 0s; }
-    .path-2 { stroke: var(--kuromi-pink); animation-delay: 2.3s; }
-    .path-3 { stroke: var(--kuromi-hotpink); animation-delay: 4.6s; }
+    .line-1 { stroke: var(--neon-purple); animation-delay: 0s; filter: drop-shadow(0 0 12px var(--neon-purple)); }
+    .line-2 { stroke: var(--kuromi-pink); animation-delay: 2s; filter: drop-shadow(0 0 12px var(--kuromi-pink)); }
+    .line-3 { stroke: var(--kuromi-hotpink); animation-delay: 4s; filter: drop-shadow(0 0 12px var(--kuromi-hotpink)); }
 
-    @keyframes drawAndFade {
+    @keyframes traceLoop {
       0% {
-        stroke-dashoffset: 1200;
+        stroke-dashoffset: 1400;
         opacity: 0;
       }
-      20% {
-        opacity: 0.8;
+      15% {
+        opacity: 1;
       }
       50% {
         stroke-dashoffset: 0;
-        opacity: 0.9;
-        filter: drop-shadow(0 0 15px var(--kuromi-hotpink));
+        opacity: 1;
       }
-      80% {
-        opacity: 0.8;
+      85% {
+        opacity: 1;
       }
       100% {
-        stroke-dashoffset: -1200;
+        stroke-dashoffset: -1400;
         opacity: 0;
       }
     }
 
-    /* Floating Flower & Heart elements rising from the background */
+    /* Floating Flower and Heart Elements */
     .bg-item {
       position: absolute;
       user-select: none;
-      animation: floatElement linear infinite;
-      opacity: 0.6;
-      filter: drop-shadow(0 0 8px var(--neon-purple));
+      animation: floatUp linear infinite;
+      opacity: 0.75;
+      filter: drop-shadow(0 0 10px var(--neon-purple));
     }
 
-    @keyframes floatElement {
-      0% { transform: translateY(105vh) rotate(0deg) scale(0.7); opacity: 0; }
-      20% { opacity: 0.8; }
-      80% { opacity: 0.8; }
+    @keyframes floatUp {
+      0% { transform: translateY(105vh) rotate(0deg) scale(0.6); opacity: 0; }
+      15% { opacity: 0.85; }
+      85% { opacity: 0.85; }
       100% { transform: translateY(-10vh) rotate(360deg) scale(1.3); opacity: 0; }
     }
 
@@ -308,17 +313,17 @@
 </head>
 <body>
 
-  <!-- SELF-DRAWING VINES & FLOATING FLOWERS BACKGROUND -->
-  <div class="bg-animation-container">
-    <svg width="100%" height="100%" style="position: absolute; top:0; left:0;" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+  <!-- FIXED VISIBLE NEON VINE BACKGROUND -->
+  <div class="bg-canvas">
+    <svg class="neon-vine-svg" viewBox="0 0 1000 1000" preserveAspectRatio="none">
       <!-- Winding Vine Path 1 -->
-      <path class="drawing-path path-1" d="M 0,100 Q 250,300 150,600 T 500,1000" />
-      <!-- Winding Heart/Vine Path 2 -->
-      <path class="drawing-path path-2" d="M 1000,200 Q 750,500 850,800 T 400,1000" />
-      <!-- Winding Flower Path 3 -->
-      <path class="drawing-path path-3" d="M 300,0 Q 500,400 200,700 T 800,1000" />
+      <path class="draw-line line-1" d="M -50,50 Q 300,300 100,600 T 500,1050" />
+      <!-- Winding Heart Line Path 2 -->
+      <path class="draw-line line-2" d="M 1050,100 Q 700,400 900,750 T 300,1050" />
+      <!-- Winding Flower Vine Path 3 -->
+      <path class="draw-line line-3" d="M 400,-50 Q 600,350 200,700 T 850,1050" />
     </svg>
-    <div id="floating-elements"></div>
+    <div id="floating-flowers"></div>
   </div>
 
   <div class="container">
@@ -384,25 +389,25 @@
       document.getElementById('secretModal').style.display = 'none';
     }
 
-    // Floating flower, heart, and vine emojis spawning continuously
-    const floatingContainer = document.getElementById('floating-elements');
-    const bgIcons = ['🌸', '💜', '✨', '🌺', '💖', '🌿'];
+    // Continuous floating flower/heart generator
+    const flowerContainer = document.getElementById('floating-flowers');
+    const symbols = ['🌸', '💜', '🌺', '💖', '✨', '🌿'];
     
-    function createBgElement() {
+    function spawnFlower() {
       const el = document.createElement('div');
       el.classList.add('bg-item');
-      el.innerText = bgIcons[Math.floor(Math.random() * bgIcons.length)];
-      el.style.left = Math.random() * 95 + 'vw';
-      el.style.animationDuration = (Math.random() * 4 + 5) + 's';
-      el.style.fontSize = (Math.random() * 12 + 18) + 'px';
+      el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 96 + 'vw';
+      el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      el.style.fontSize = (Math.random() * 14 + 18) + 'px';
       
-      floatingContainer.appendChild(el);
-      setTimeout(() => { el.remove(); }, 9000);
+      flowerContainer.appendChild(el);
+      setTimeout(() => { el.remove(); }, 7500);
     }
-    setInterval(createBgElement, 350);
+    setInterval(spawnFlower, 300);
 
-    // Click/tap heart burst effects
-    const heartSymbols = ['💖', '💜', '✨', '🌸', '💀'];
+    // Tap click heart bursts
+    const heartSymbols = ['💖', '💜', '✨', '🌸',];
     function spawnHeart(x, y) {
       const heart = document.createElement('div');
       heart.className = 'tap-heart';
