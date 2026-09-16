@@ -22,7 +22,6 @@
       font-family: 'Fredoka', sans-serif;
     }
 
-    /* Custom cute cursor */
     body, button, a, img {
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23c084fc" stroke="%23f472b6" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto !important;
     }
@@ -30,8 +29,8 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(244, 114, 182, 0.18) 0%, transparent 45%);
+        radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(244, 114, 182, 0.15) 0%, transparent 45%);
       color: #f3e8ff;
       min-height: 100vh;
       display: flex;
@@ -42,8 +41,8 @@
       position: relative;
     }
 
-    /* BLOOMING VINE & FLOWER BACKGROUND CANVAS */
-    .bloom-canvas {
+    /* BACKGROUND TRACING VINE, FLOWER, AND HEART SVG */
+    .bg-svg-container {
       position: fixed;
       top: 0;
       left: 0;
@@ -51,62 +50,54 @@
       height: 100vh;
       z-index: -1;
       pointer-events: none;
-      overflow: hidden;
     }
 
-    /* Self-drawing growing vine & flower stem */
-    .growing-vine {
-      position: absolute;
+    .drawing-path {
       fill: none;
-      stroke-width: 4;
+      stroke-width: 3.5;
       stroke-linecap: round;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: drawVine 8s ease-in-out infinite;
+      stroke-linejoin: round;
+      stroke-dasharray: 1400;
+      stroke-dashoffset: 1400;
+      animation: traceEffect 10s ease-in-out infinite;
+    }
+
+    /* Left Vine & Flower */
+    .path-left-vine {
+      stroke: var(--neon-purple);
+      animation-delay: 0s;
       filter: drop-shadow(0 0 10px var(--neon-purple));
     }
 
-    .vine-1 { stroke: var(--neon-purple); top: 5%; left: 5%; width: 45vw; height: 90vh; animation-delay: 0s; }
-    .vine-2 { stroke: var(--kuromi-pink); top: 5%; right: 5%; width: 45vw; height: 90vh; animation-delay: 4s; transform: scaleX(-1); }
-
-    @keyframes drawVine {
-      0% { stroke-dashoffset: 1000; opacity: 0; }
-      15% { opacity: 0.9; }
-      50% { stroke-dashoffset: 0; opacity: 0.9; }
-      85% { opacity: 0.9; }
-      100% { stroke-dashoffset: -1000; opacity: 0; }
+    /* Right Vine & Heart */
+    .path-right-heart {
+      stroke: var(--kuromi-hotpink);
+      animation-delay: 5s;
+      filter: drop-shadow(0 0 10px var(--kuromi-hotpink));
     }
 
-    /* Blooming flowers & hearts embedded in the background */
-    .bloom-item {
-      position: absolute;
-      font-size: 1.8rem;
-      animation: bloomPulse 4s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 12px var(--kuromi-hotpink));
-      user-select: none;
+    @keyframes traceEffect {
+      0% {
+        stroke-dashoffset: 1400;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      60% {
+        stroke-dashoffset: 0; /* Fully drawn line */
+        opacity: 1;
+      }
+      85% {
+        opacity: 1;
+      }
+      100% {
+        stroke-dashoffset: -1400; /* Wipes clean to loop */
+        opacity: 0;
+      }
     }
 
-    @keyframes bloomPulse {
-      0% { transform: scale(0.7) rotate(0deg); opacity: 0.4; }
-      100% { transform: scale(1.3) rotate(15deg); opacity: 1; }
-    }
-
-    /* Floating magical dust */
-    .floating-sparkle {
-      position: absolute;
-      user-select: none;
-      animation: floatParticle linear infinite;
-      opacity: 0.7;
-    }
-
-    @keyframes floatParticle {
-      0% { transform: translateY(105vh) scale(0.6) rotate(0deg); opacity: 0; }
-      20% { opacity: 0.8; }
-      80% { opacity: 0.8; }
-      100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
-    }
-
-    /* CLICK/TOUCH HEART BURST EFFECT */
+    /* CLICK / TOUCH HEART BURST EFFECT */
     .tap-heart {
       position: fixed;
       pointer-events: none;
@@ -331,13 +322,14 @@
 </head>
 <body>
 
-  <!-- BACKGROUND BLOOMING VINES & MAGICAL DUST -->
-  <div class="bloom-canvas" id="bloomCanvas">
-    <svg class="growing-vine vine-1" viewBox="0 0 400 800" preserveAspectRatio="none">
-      <path d="M 20,780 C 100,500 350,450 150,250 C 50,150 250,50 380,10" />
-    </svg>
-    <svg class="growing-vine vine-2" viewBox="0 0 400 800" preserveAspectRatio="none">
-      <path d="M 20,780 C 100,500 350,450 150,250 C 50,150 250,50 380,10" />
+  <!-- BACKGROUND SELF-DRAWING VINE INTO FLOWER AND HEART -->
+  <div class="bg-svg-container">
+    <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      <!-- Left side: Vine twisting up and blossoming into a Flower shape -->
+      <path class="drawing-path path-left-vine" d="M 50,950 Q 150,750 80,600 T 200,400 Q 280,300 200,200 Q 120,100 200,50 Q 280,10 240,80 Q 200,150 250,200 Q 300,250 200,400" />
+      
+      <!-- Right side: Vine twisting up and blossoming into a Heart shape -->
+      <path class="drawing-path path-right-heart" d="M 950,950 Q 850,750 920,600 T 800,400 Q 720,300 800,200 C 850,150 920,180 920,250 C 920,320 800,420 800,420 C 800,420 680,320 680,250 C 680,180 750,150 800,200" />
     </svg>
   </div>
 
@@ -406,39 +398,6 @@
     function closeSecretModal() {
       document.getElementById('secretModal').style.display = 'none';
     }
-
-    // Dynamic Blooming Flowers & Hearts along vines + Floating Sparkles
-    const bloomCanvas = document.getElementById('bloomCanvas');
-    const cuteElements = ['🌸', '💜', '🌺', '💖', '✨', '🌿', '🌷'];
-    
-    function spawnBloomItem() {
-      const el = document.createElement('div');
-      el.classList.add('bloom-item');
-      el.innerText = cuteElements[Math.floor(Math.random() * cuteElements.length)];
-      // Position them along the sides where vines grow
-      const side = Math.random() > 0.5 ? Math.random() * 25 : 75 + Math.random() * 20;
-      el.style.left = side + 'vw';
-      el.style.top = Math.random() * 90 + 'vh';
-      el.style.animationDuration = (Math.random() * 3 + 3) + 's';
-      
-      bloomCanvas.appendChild(el);
-      setTimeout(() => { el.remove(); }, 7000);
-    }
-    setInterval(spawnBloomItem, 500);
-
-    // Floating Sparkles
-    function spawnSparkle() {
-      const el = document.createElement('div');
-      el.classList.add('floating-sparkle');
-      el.innerText = cuteElements[Math.floor(Math.random() * cuteElements.length)];
-      el.style.left = Math.random() * 96 + 'vw';
-      el.style.animationDuration = (Math.random() * 4 + 4) + 's';
-      el.style.fontSize = (Math.random() * 12 + 14) + 'px';
-      
-      bloomCanvas.appendChild(el);
-      setTimeout(() => { el.remove(); }, 8000);
-    }
-    setInterval(spawnSparkle, 300);
 
     // Click / Touch Heart Burst Effect
     const burstSymbols = ['💖', '💜', '✨', '🌸', '🎀', '🖤'];
