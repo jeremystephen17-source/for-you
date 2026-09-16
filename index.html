@@ -7,12 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
   <style>
     :root {
+      --kuromi-dark: #05010a;
       --kuromi-purple: #130620;
       --kuromi-pastel: #e9d5ff;
       --kuromi-pink: #f472b6;
       --kuromi-hotpink: #ff49db;
       --neon-purple: #c084fc;
-      --card-bg: rgba(14, 6, 22, 0.72);
+      --card-bg: rgba(14, 6, 22, 0.78);
     }
 
     * {
@@ -27,7 +28,7 @@
     }
 
     body {
-      background-color: #05010a;
+      background-color: var(--kuromi-dark);
       color: #f3e8ff;
       min-height: 100vh;
       display: flex;
@@ -38,60 +39,70 @@
       position: relative;
     }
 
-    /* FULLSCREEN FIXED VIDEO BACKGROUND */
-    .video-background-wrapper {
+    /* ANIMATED SELF-DRAWING VINE, FLOWER & HEART BACKGROUND */
+    .bg-animation-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -999;
+      z-index: -1;
       pointer-events: none;
       overflow: hidden;
-      background: #000000;
+      background: radial-gradient(circle at 50% 50%, #150624 0%, #05010a 85%);
     }
 
-    #bg-video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100vw;
-      height: 100vh;
-      transform: translate(-50%, -50%);
-      object-fit: cover; /* Forces the video to cover the entire screen completely */
-      filter: brightness(1.4) contrast(1.3) saturate(1.4);
+    /* Self-drawing path animation */
+    .drawing-path {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: drawAndFade 7s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px var(--neon-purple));
     }
 
-    /* LIGHT ATMOSPHERIC GLOW SO TEXT REMAINS READABLE */
-    .video-overlay-glow {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: radial-gradient(circle at 50% 40%, rgba(192, 132, 252, 0.05) 0%, rgba(5, 1, 10, 0.35) 90%);
-      z-index: -998;
-      pointer-events: none;
+    .path-1 { stroke: var(--neon-purple); animation-delay: 0s; }
+    .path-2 { stroke: var(--kuromi-pink); animation-delay: 2.3s; }
+    .path-3 { stroke: var(--kuromi-hotpink); animation-delay: 4.6s; }
+
+    @keyframes drawAndFade {
+      0% {
+        stroke-dashoffset: 1200;
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      50% {
+        stroke-dashoffset: 0;
+        opacity: 0.9;
+        filter: drop-shadow(0 0 15px var(--kuromi-hotpink));
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        stroke-dashoffset: -1200;
+        opacity: 0;
+      }
     }
 
-    #fx-container {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .fading-heart {
+    /* Floating Flower & Heart elements rising from the background */
+    .bg-item {
       position: absolute;
       user-select: none;
-      animation: floatAndFade ease-in-out infinite;
-      filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.9));
+      animation: floatElement linear infinite;
+      opacity: 0.6;
+      filter: drop-shadow(0 0 8px var(--neon-purple));
     }
 
-    @keyframes floatAndFade {
-      0% { opacity: 0; transform: translateY(20px) scale(0.6) rotate(-10deg); }
-      30% { opacity: 0.85; }
-      70% { opacity: 0.85; }
-      100% { opacity: 0; transform: translateY(-80px) scale(1.3) rotate(15deg); }
+    @keyframes floatElement {
+      0% { transform: translateY(105vh) rotate(0deg) scale(0.7); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) rotate(360deg) scale(1.3); opacity: 0; }
     }
 
     .tap-heart {
@@ -109,13 +120,13 @@
       100% { opacity: 0; transform: scale(0.6) translateY(-50px) rotate(20deg); }
     }
 
-    /* MAIN CONTAINER WITH SEMI-TRANSPARENT BACKGROUND */
+    /* MAIN CONTAINER */
     .container {
       max-width: 680px;
       width: 100%;
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 2px solid rgba(192, 132, 252, 0.55);
       border-radius: 36px;
       padding: 40px 22px 35px 22px;
@@ -297,15 +308,18 @@
 </head>
 <body>
 
-  <!-- FULLSCREEN BACKGROUND VIDEO -->
-  <div class="video-background-wrapper">
-    <video autoplay loop muted playsinline id="bg-video">
-      <source src="background.mp4" type="video/mp4">
-    </video>
+  <!-- SELF-DRAWING VINES & FLOATING FLOWERS BACKGROUND -->
+  <div class="bg-animation-container">
+    <svg width="100%" height="100%" style="position: absolute; top:0; left:0;" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      <!-- Winding Vine Path 1 -->
+      <path class="drawing-path path-1" d="M 0,100 Q 250,300 150,600 T 500,1000" />
+      <!-- Winding Heart/Vine Path 2 -->
+      <path class="drawing-path path-2" d="M 1000,200 Q 750,500 850,800 T 400,1000" />
+      <!-- Winding Flower Path 3 -->
+      <path class="drawing-path path-3" d="M 300,0 Q 500,400 200,700 T 800,1000" />
+    </svg>
+    <div id="floating-elements"></div>
   </div>
-  <div class="video-overlay-glow"></div>
-
-  <div id="fx-container"></div>
 
   <div class="container">
     <h1 class="title">Hi my baby shobe ✨</h1>
@@ -350,7 +364,7 @@
     <div class="modal-content">
       <h2 style="color: var(--kuromi-pink); font-family: 'Sacramento', cursive; font-size: 2.8rem;">Surprise! 🎉</h2>
       <p style="margin-top: 10px; color: #f3e8ff; line-height: 1.6;">
-        You just scanned the code and found this! I love you so much! 💜✨
+        You just found the secret note! I love you so much! 💜✨
       </p>
       <button class="close-btn" onclick="closeSecretModal()">Close 🖤</button>
     </div>
@@ -370,23 +384,25 @@
       document.getElementById('secretModal').style.display = 'none';
     }
 
-    const fxContainer = document.getElementById('fx-container');
-    const purpleHearts = ['💜', '💜', '🖤', '💜', '💖', '✨'];
-    function createFadingHeart() {
-      const h = document.createElement('div');
-      h.classList.add('fading-heart');
-      h.innerText = purpleHearts[Math.floor(Math.random() * purpleHearts.length)];
-      h.style.left = Math.random() * 95 + 'vw';
-      h.style.top = Math.random() * 90 + 'vh';
-      h.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
-      h.style.fontSize = (Math.random() * 16 + 18) + 'px';
-
-      fxContainer.appendChild(h);
-      setTimeout(() => { h.remove(); }, 4500);
+    // Floating flower, heart, and vine emojis spawning continuously
+    const floatingContainer = document.getElementById('floating-elements');
+    const bgIcons = ['🌸', '💜', '✨', '🌺', '💖', '🌿'];
+    
+    function createBgElement() {
+      const el = document.createElement('div');
+      el.classList.add('bg-item');
+      el.innerText = bgIcons[Math.floor(Math.random() * bgIcons.length)];
+      el.style.left = Math.random() * 95 + 'vw';
+      el.style.animationDuration = (Math.random() * 4 + 5) + 's';
+      el.style.fontSize = (Math.random() * 12 + 18) + 'px';
+      
+      floatingContainer.appendChild(el);
+      setTimeout(() => { el.remove(); }, 9000);
     }
-    setInterval(createFadingHeart, 350);
+    setInterval(createBgElement, 350);
 
-    const heartSymbols = ['💖', '💜', '✨', '🎀',];
+    // Click/tap heart burst effects
+    const heartSymbols = ['💖', '💜', '✨', '🌸', '💀'];
     function spawnHeart(x, y) {
       const heart = document.createElement('div');
       heart.className = 'tap-heart';
