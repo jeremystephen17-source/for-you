@@ -39,7 +39,7 @@
       position: relative;
     }
 
-    /* FULLSCREEN FIXED BACKGROUND VINES & LINES */
+    /* FULLSCREEN FIXED BACKGROUND SHAPES */
     .bg-canvas {
       position: fixed;
       top: 0;
@@ -59,50 +59,52 @@
       height: 100%;
     }
 
-    /* SMOOTH SLOW SELF-DRAWING NEON LINES */
-    .draw-line {
+    /* TRULY SLOW, VISIBLE SELF-DRAWING SHAPES */
+    .draw-path {
       fill: none;
-      stroke-width: 3.5;
+      stroke-width: 4;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 2000;
-      stroke-dashoffset: 2000;
-      animation: smoothDraw 10s ease-in-out infinite;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: traceShape 12s linear infinite;
     }
 
-    .line-1 { 
-      stroke: var(--neon-purple); 
-      animation-delay: 0s; 
-      filter: drop-shadow(0 0 10px var(--neon-purple)); 
-    }
-    .line-2 { 
-      stroke: var(--kuromi-pink); 
-      animation-delay: 3.3s; 
-      filter: drop-shadow(0 0 10px var(--kuromi-pink)); 
-    }
-    .line-3 { 
-      stroke: var(--kuromi-hotpink); 
-      animation-delay: 6.6s; 
-      filter: drop-shadow(0 0 10px var(--kuromi-hotpink)); 
+    .shape-heart {
+      stroke: var(--kuromi-hotpink);
+      animation-delay: 0s;
+      filter: drop-shadow(0 0 14px var(--kuromi-hotpink));
     }
 
-    @keyframes smoothDraw {
+    .shape-flower {
+      stroke: var(--neon-purple);
+      animation-delay: 4s;
+      filter: drop-shadow(0 0 14px var(--neon-purple));
+    }
+
+    .shape-vine {
+      stroke: var(--kuromi-pink);
+      animation-delay: 8s;
+      filter: drop-shadow(0 0 14px var(--kuromi-pink));
+    }
+
+    @keyframes traceShape {
       0% {
-        stroke-dashoffset: 2000;
+        stroke-dashoffset: 1200;
         opacity: 0;
       }
-      10% {
+      5% {
         opacity: 1;
       }
       50% {
-        stroke-dashoffset: 0; /* Fully drawn out */
-        opacity: 0.9;
+        stroke-dashoffset: 0; /* fully drawn */
+        opacity: 1;
       }
-      85% {
-        opacity: 0.8;
+      80% {
+        opacity: 1;
       }
       100% {
-        stroke-dashoffset: -2000; /* Erases away smoothly */
+        stroke-dashoffset: -1200; /* wipes away clean */
         opacity: 0;
       }
     }
@@ -326,15 +328,17 @@
 </head>
 <body>
 
-  <!-- SLOW SELF-DRAWING VINE BACKGROUND -->
+  <!-- SELF-DRAWING HEART, FLOWER, AND VINE BACKGROUND -->
   <div class="bg-canvas">
     <svg class="neon-vine-svg" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-      <!-- Winding Vine Path 1 -->
-      <path class="draw-line line-1" d="M -50,100 C 300,200 200,600 500,500 C 800,400 700,900 1050,1000" />
-      <!-- Winding Heart Line Path 2 -->
-      <path class="draw-line line-2" d="M 1050,50 C 700,300 800,700 500,600 C 200,500 300,950 -50,1050" />
-      <!-- Winding Flower Vine Path 3 -->
-      <path class="draw-line line-3" d="M 200,-50 C 400,400 100,700 600,800 C 900,900 800,500 950,1050" />
+      <!-- Big Glowing Tracing Heart Outline -->
+      <path class="draw-path shape-heart" d="M 500,250 C 500,150 350,100 250,200 C 150,300 200,450 500,750 C 800,450 850,300 750,200 C 650,100 500,150 500,250 Z" />
+      
+      <!-- Big Glowing Tracing Flower Shape -->
+      <path class="draw-path shape-flower" d="M 200,750 Q 150,650 250,600 Q 350,550 300,700 Q 250,850 200,750 Z M 250,600 Q 300,500 400,550 Q 500,600 350,700 Z M 350,700 Q 450,750 400,850 Q 350,950 250,850 Z M 250,850 Q 150,950 100,850 Q 50,750 200,750 Z" />
+      
+      <!-- Winding Vine Stem Tracing -->
+      <path class="draw-path shape-vine" d="M 50,-50 Q 400,300 200,600 T 900,1050" />
     </svg>
     <div id="floating-flowers"></div>
   </div>
