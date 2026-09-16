@@ -7,12 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
   <style>
     :root {
-      --kuromi-dark: #12091c;
-      --kuromi-purple: #2a163d;
-      --kuromi-pastel: #d8b4fe;
+      --kuromi-dark: #0f0716;
+      --kuromi-purple: #231134;
+      --kuromi-pastel: #e9d5ff;
       --kuromi-pink: #f472b6;
       --kuromi-accent: #c084fc;
-      --card-bg: rgba(35, 17, 52, 0.85);
+      --card-bg: rgba(28, 14, 43, 0.88);
     }
 
     * {
@@ -23,7 +23,9 @@
     }
 
     body {
-      background: radial-gradient(circle at center, #2e1065 0%, var(--kuromi-dark) 90%);
+      background: linear-gradient(-45deg, #12071f, #2e1065, #3b0764, #1e1b4b);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
       color: #f3e8ff;
       min-height: 100vh;
       display: flex;
@@ -34,61 +36,106 @@
       position: relative;
     }
 
-    #snow-container {
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Fixed Background Layer for Floating Effects */
+    #fx-container {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 10;
+      z-index: 0;
       overflow: hidden;
     }
 
-    .snowflake {
+    /* Floating Particles (Snow / Emojis) */
+    .particle {
       position: absolute;
-      top: -20px;
-      color: var(--kuromi-pink);
+      top: -30px;
       user-select: none;
-      font-size: 1rem;
       animation: fall linear infinite;
-      text-shadow: 0 0 8px var(--kuromi-accent);
+      text-shadow: 0 0 12px var(--kuromi-pink);
     }
 
     @keyframes fall {
-      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+      0% { transform: translateY(-30px) rotate(0deg) scale(0.8); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(360deg) scale(1.2); opacity: 0.1; }
     }
 
+    /* Floating Cute Background Stickers */
+    .floating-sticker {
+      position: absolute;
+      user-select: none;
+      opacity: 0.25;
+      animation: floatSticker 8s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 8px var(--kuromi-accent));
+    }
+
+    .st-1 { top: 10%; left: 8%; font-size: 2.5rem; animation-duration: 6s; }
+    .st-2 { top: 60%; left: 5%; font-size: 3rem; animation-duration: 9s; animation-delay: -2s; }
+    .st-3 { top: 20%; right: 8%; font-size: 2.8rem; animation-duration: 7s; animation-delay: -4s; }
+    .st-4 { top: 75%; right: 6%; font-size: 3.2rem; animation-duration: 10s; animation-delay: -1s; }
+
+    @keyframes floatSticker {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(15deg); }
+      100% { transform: translateY(15px) rotate(-10deg); }
+    }
+
+    /* Glowing Orbs */
     .sparkle {
       position: absolute;
-      background: radial-gradient(circle, rgba(244, 114, 182, 0.35) 0%, rgba(0,0,0,0) 70%);
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.45) 0%, rgba(192, 132, 252, 0.15) 60%, rgba(0,0,0,0) 80%);
       border-radius: 50%;
       z-index: 0;
-      filter: blur(40px);
-      animation: floatSparkle 6s infinite alternate ease-in-out;
+      filter: blur(50px);
+      animation: floatSparkle 7s infinite alternate ease-in-out;
     }
-    .sp-1 { width: 350px; height: 350px; top: -50px; left: -80px; }
-    .sp-2 { width: 300px; height: 300px; bottom: 50px; right: -60px; }
+    .sp-1 { width: 380px; height: 380px; top: -40px; left: -100px; }
+    .sp-2 { width: 320px; height: 320px; bottom: 40px; right: -80px; animation-delay: -3.5s; }
 
     @keyframes floatSparkle {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(25px) scale(1.1); }
+      100% { transform: translateY(35px) scale(1.15); }
     }
 
+    /* Cursor Trail Effect */
+    .trail-sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.2rem;
+      z-index: 9999;
+      animation: fadeTrail 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeTrail {
+      0% { opacity: 1; transform: scale(1) translateY(0); }
+      100% { opacity: 0; transform: scale(0.3) translateY(-20px); }
+    }
+
+    /* Main Container with Soft Pulsing Glow */
     .container {
       max-width: 680px;
       width: 100%;
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 3px solid var(--kuromi-pink);
       border-radius: 32px;
       padding: 35px 20px;
-      box-shadow: 0 0 35px rgba(236, 72, 153, 0.35), inset 0 0 15px rgba(192, 132, 252, 0.2);
+      animation: pulseGlow 4s infinite alternate ease-in-out;
       text-align: center;
       z-index: 1;
       position: relative;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 25px rgba(236, 72, 153, 0.3), inset 0 0 10px rgba(192, 132, 252, 0.2); }
+      100% { box-shadow: 0 0 45px rgba(236, 72, 153, 0.6), inset 0 0 20px rgba(192, 132, 252, 0.4); }
     }
 
     h1.title {
@@ -133,7 +180,7 @@
 
     .letter-box {
       display: none;
-      background: rgba(18, 9, 28, 0.92);
+      background: rgba(18, 9, 28, 0.95);
       border: 2px dashed var(--kuromi-pastel);
       border-radius: 24px;
       padding: 25px;
@@ -250,7 +297,14 @@
 </head>
 <body>
 
-  <div id="snow-container"></div>
+  <!-- Floating Background Effects -->
+  <div id="fx-container"></div>
+  
+  <div class="floating-sticker st-1">💀</div>
+  <div class="floating-sticker st-2">🎀</div>
+  <div class="floating-sticker st-3">🖤</div>
+  <div class="floating-sticker st-4">🔮</div>
+
   <div class="sparkle sp-1"></div>
   <div class="sparkle sp-2"></div>
 
@@ -317,21 +371,36 @@
       document.getElementById('secretModal').style.display = 'none';
     }
 
-    const snowContainer = document.getElementById('snow-container');
-    const symbols = ['💜', '🥰', '🌸', '❄️', '😘', '💐'];
+    /* Falling Cute Particles Generator */
+    const fxContainer = document.getElementById('fx-container');
+    const symbols = ['💜', '✨', '🌸', '🔮', '💀', '💖', '🖤', '🎀', '🌙'];
 
-    function createSnowflake() {
-      const flake = document.createElement('div');
-      flake.classList.add('snowflake');
-      flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-      flake.style.left = Math.random() * 100 + 'vw';
-      flake.style.animationDuration = (Math.random() * 3 + 4) + 's';
-      flake.style.fontSize = (Math.random() * 10 + 12) + 'px';
+    function createParticle() {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      p.style.fontSize = (Math.random() * 10 + 12) + 'px';
       
-      snowContainer.appendChild(flake);
-      setTimeout(() => { flake.remove(); }, 7000);
+      fxContainer.appendChild(p);
+      setTimeout(() => { p.remove(); }, 7000);
     }
-    setInterval(createSnowflake, 300);
+    setInterval(createParticle, 220);
+
+    /* Mouse / Touch Sparkle Trail Effect */
+    const trailSymbols = ['✨', '💜', '💖', '🌸'];
+    document.addEventListener('mousemove', (e) => {
+      if (Math.random() > 0.6) return; // Limit trail density
+      const trail = document.createElement('div');
+      trail.className = 'trail-sparkle';
+      trail.innerText = trailSymbols[Math.floor(Math.random() * trailSymbols.length)];
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
+      document.body.appendChild(trail);
+
+      setTimeout(() => { trail.remove(); }, 800);
+    });
   </script>
 </body>
 </html>
