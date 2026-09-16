@@ -151,8 +151,8 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
     }
 
     .memory-card {
@@ -173,7 +173,7 @@
 
     .memory-card img {
       width: 100%;
-      height: 170px;
+      height: 160px;
       object-fit: cover;
       border-radius: 12px;
     }
@@ -236,8 +236,8 @@
   <div class="glow-orb orb-2"></div>
 
   <div class="container">
-    <h1 class="title">Hey Pretty Girl ✨</h1>
-    <p class="subtitle">I BUILT THIS LITTLE SURPRISE CORNER FOR YOU 💜</p>
+    <h1 class="title">Hi my baby shobe ✨</h1>
+    <p class="subtitle">Happy 5th Monthsary My Love!!! 💜</p>
 
     <!-- Buttons -->
     <div class="btn-group">
@@ -247,9 +247,11 @@
 
     <!-- Letter Box -->
     <div class="letter-box" id="letterBox">
-      <h3>My Dearest,</h3>
+      <h3>My Babyyy,</h3>
       <p>
         I created this page to remind you of how much you mean to me. Every moment spent with you is full of happiness, laughter, and cute memories. Thank you for being my favorite person every day! 💜
+        <br><br>
+        Alam ko na hindi naging madali 'tong mga past weeks natin and, honestly, kahit lagi tayong nag-aaway, I’m so grateful kasi hindi ka pa rin sumusuko sa atin. Thank you for staying, for choosing us, and for holding on even when things get tough. Ikaw at ikaw pa rin talaga. Iloveeeyousomuchhh baby ko 💜
       </p>
       <p style="margin-top: 15px; text-align: right; font-weight: bold; color: var(--purple-accent);">
         Forever yours ✨
@@ -263,16 +265,44 @@
 
     <div class="gallery">
       <div class="memory-card">
-        <img src="https://via.placeholder.com/300x300/2a0e45/ffffff?text=Our+Photo+1" alt="Memory 1">
+        <img src="19e44c68-630c-4837-9a37-14dfc7f967db.jpg" alt="Memory 1">
         <div class="caption">The Best Day 💜</div>
       </div>
       <div class="memory-card">
-        <img src="https://via.placeholder.com/300x300/2a0e45/ffffff?text=Our+Photo+2" alt="Memory 2">
+        <img src="40da9cf9-076f-48c0-82c2-01337c6fa660.jpg" alt="Memory 2">
         <div class="caption">Favorite Smile 😊</div>
       </div>
       <div class="memory-card">
-        <img src="https://via.placeholder.com/300x300/2a0e45/ffffff?text=Our+Photo+3" alt="Memory 3">
+        <img src="5489d26b-4f38-4d7e-bafa-49961552531e.jpg" alt="Memory 3">
         <div class="caption">Always Together ✨</div>
+      </div>
+      <div class="memory-card">
+        <img src="7920776703_10006853131_1775819140472.jpg" alt="Memory 4">
+        <div class="caption">Sweet Times 🌸</div>
+      </div>
+      <div class="memory-card">
+        <img src="86e0c11b-4d38-4b3f-b91f-6f4f8a252576.jpg" alt="Memory 5">
+        <div class="caption">Cutest Moments 💖</div>
+      </div>
+      <div class="memory-card">
+        <img src="IMG_20260613_032549_962.jpg" alt="Memory 6">
+        <div class="caption">My Happiness 🥰</div>
+      </div>
+      <div class="memory-card">
+        <img src="befd75e1-d96a-46f8-a089-7b2820b3978e.jpg" alt="Memory 7">
+        <div class="caption">Unforgettable 💜</div>
+      </div>
+      <div class="memory-card">
+        <img src="c62e2f0b-11f4-4232-a7a6-0c618d680610.jpg" alt="Memory 8">
+        <div class="caption">My Favorite Person ✨</div>
+      </div>
+      <div class="memory-card">
+        <img src="d937a043-f1b3-45df-a94d-08027779e53a.jpg" alt="Memory 9">
+        <div class="caption">Love You Always 🔮</div>
+      </div>
+      <div class="memory-card">
+        <img src="image.png" alt="Memory 10">
+        <div class="caption">Forever & Ever 💖</div>
       </div>
     </div>
   </div>
