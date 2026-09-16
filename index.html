@@ -7,13 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
   <style>
     :root {
-      --kuromi-dark: #0d0514;
-      --kuromi-purple: #231134;
+      --kuromi-dark: #0a0410;
+      --kuromi-purple: #210d33;
       --kuromi-pastel: #e9d5ff;
       --kuromi-pink: #f472b6;
       --kuromi-hotpink: #ff49db;
       --kuromi-accent: #c084fc;
-      --card-bg: rgba(26, 12, 40, 0.85);
+      --card-bg: rgba(22, 10, 34, 0.88);
     }
 
     * {
@@ -23,15 +23,19 @@
       font-family: 'Fredoka', sans-serif;
     }
 
-    /* Custom Cute Purple Heart Cursor */
     body, button, a, img {
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23c084fc" stroke="%23f472b6" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto !important;
     }
 
+    /* Background with dark purple ornate floral overlay */
     body {
-      background: linear-gradient(135deg, #0d0514 0%, #2e1065 40%, #4c1d95 70%, #1e1b4b 100%);
-      background-size: 300% 300%;
-      animation: gradientBG 10s ease infinite;
+      background-color: var(--kuromi-dark);
+      /* Replace 'floral-bg.jpg' with your saved image file name */
+      background-image: linear-gradient(to bottom, rgba(10, 4, 16, 0.4), rgba(10, 4, 16, 0.95)), url('floral-bg.jpg');
+      background-size: cover;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: #f3e8ff;
       min-height: 100vh;
       display: flex;
@@ -40,12 +44,6 @@
       padding: 30px 15px;
       overflow-x: hidden;
       position: relative;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     #fx-container {
@@ -57,29 +55,18 @@
       overflow: hidden;
     }
 
-    /* Fading Floating Purple Hearts Across Whole Page */
     .fading-heart {
       position: absolute;
       user-select: none;
       animation: floatAndFade ease-in-out infinite;
-      filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.8));
+      filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.9));
     }
 
     @keyframes floatAndFade {
-      0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.6) rotate(-10deg);
-      }
-      30% {
-        opacity: 0.85;
-      }
-      70% {
-        opacity: 0.85;
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-80px) scale(1.3) rotate(15deg);
-      }
+      0% { opacity: 0; transform: translateY(20px) scale(0.6) rotate(-10deg); }
+      30% { opacity: 0.85; }
+      70% { opacity: 0.85; }
+      100% { opacity: 0; transform: translateY(-80px) scale(1.3) rotate(15deg); }
     }
 
     .particle {
@@ -100,7 +87,7 @@
       user-select: none;
       opacity: 0.35;
       animation: floatSticker 6s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 12px var(--kuromi-hotpink));
+      filter: drop-shadow(0 0 12px var(--kuromi-accent));
     }
 
     .st-1 { top: 8%; left: 4%; font-size: 3rem; animation-duration: 5s; }
@@ -129,29 +116,13 @@
       100% { opacity: 0; transform: scale(0.6) translateY(-50px) rotate(20deg); }
     }
 
-    .sparkle {
-      position: absolute;
-      background: radial-gradient(circle, rgba(244, 114, 182, 0.5) 0%, rgba(192, 132, 252, 0.2) 60%, rgba(0,0,0,0) 80%);
-      border-radius: 50%;
-      z-index: 0;
-      filter: blur(60px);
-      animation: floatSparkle 6s infinite alternate ease-in-out;
-    }
-    .sp-1 { width: 420px; height: 420px; top: -50px; left: -120px; }
-    .sp-2 { width: 360px; height: 360px; bottom: 30px; right: -100px; animation-delay: -3s; }
-
-    @keyframes floatSparkle {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(40px) scale(1.2); }
-    }
-
     .container {
       max-width: 680px;
       width: 100%;
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 3.5px solid var(--kuromi-pink);
+      border: 3.5px solid var(--kuromi-accent);
       border-radius: 36px;
       padding: 38px 22px;
       animation: pulseGlow 3.5s infinite alternate ease-in-out;
@@ -161,15 +132,15 @@
     }
 
     @keyframes pulseGlow {
-      0% { box-shadow: 0 0 25px rgba(236, 72, 153, 0.35), inset 0 0 15px rgba(192, 132, 252, 0.25); }
-      100% { box-shadow: 0 0 50px rgba(236, 72, 153, 0.7), 0 0 20px rgba(244, 114, 182, 0.4), inset 0 0 25px rgba(192, 132, 252, 0.5); }
+      0% { box-shadow: 0 0 25px rgba(192, 132, 252, 0.35), inset 0 0 15px rgba(192, 132, 252, 0.25); }
+      100% { box-shadow: 0 0 50px rgba(192, 132, 252, 0.7), 0 0 20px rgba(244, 114, 182, 0.4), inset 0 0 25px rgba(192, 132, 252, 0.5); }
     }
 
     h1.title {
       font-family: 'Sacramento', cursive;
       font-size: 4rem;
       color: #ffffff;
-      text-shadow: 0 0 15px var(--kuromi-pastel), 0 0 30px var(--kuromi-pink);
+      text-shadow: 0 0 15px var(--kuromi-pastel), 0 0 30px var(--kuromi-accent);
       margin-bottom: 5px;
     }
 
@@ -287,7 +258,7 @@
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 5, 20, 0.88);
+      background: rgba(10, 4, 16, 0.88);
       backdrop-filter: blur(10px);
       z-index: 100;
       justify-content: center;
@@ -327,13 +298,10 @@
 
   <div id="fx-container"></div>
   
-  <div class="floating-sticker st-1">🌸</div>
+  <div class="floating-sticker st-1">💀</div>
   <div class="floating-sticker st-2">🎀</div>
-  <div class="floating-sticker st-3">💜</div>
+  <div class="floating-sticker st-3">🖤</div>
   <div class="floating-sticker st-4">🔮</div>
-
-  <div class="sparkle sp-1"></div>
-  <div class="sparkle sp-2"></div>
 
   <div class="container">
     <h1 class="title">Hi my baby shobe ✨</h1>
@@ -399,9 +367,8 @@
     }
 
     const fxContainer = document.getElementById('fx-container');
-    const symbols = ['💜', '✨', '🌸', '🔮', '💖', '🖤', '🎀', '🌙', '⭐'];
+    const symbols = ['💜', '✨', '🌸', '🔮', '💀', '💖', '🖤', '🎀', '🌙', '⭐'];
 
-    /* Falling Particles Generator */
     function createParticle() {
       const p = document.createElement('div');
       p.classList.add('particle');
@@ -415,7 +382,6 @@
     }
     setInterval(createParticle, 180);
 
-    /* Floating & Fading Purple Hearts Generator */
     const purpleHearts = ['💜', '💜', '🖤', '💜', '💖'];
     function createFadingHeart() {
       const h = document.createElement('div');
@@ -431,8 +397,7 @@
     }
     setInterval(createFadingHeart, 300);
 
-    /* Tap/Click Heart Sparkle Burst */
-    const heartSymbols = ['💖', '💜', '✨', '🎀', ];
+    const heartSymbols = ['💖', '💜', '✨', '🎀', '💀'];
     function spawnHeart(x, y) {
       const heart = document.createElement('div');
       heart.className = 'tap-heart';
