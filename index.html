@@ -41,7 +41,7 @@
       position: relative;
     }
 
-    /* FULLSCREEN VECTOR GARDEN BACKGROUND */
+    /* FULLSCREEN VINE GARDEN BACKGROUND */
     .garden-bg {
       position: fixed;
       top: 0;
@@ -52,68 +52,66 @@
       pointer-events: none;
     }
 
-    /* VINE STEM DRAWING ANIMATION */
-    .vine-stem {
+    /* ORGANIC CLIMBING VINE STEMS THAT DRAW THEMSELVES */
+    .organic-vine {
       fill: none;
       stroke: var(--neon-purple);
-      stroke-width: 4;
+      stroke-width: 3.5;
       stroke-linecap: round;
-      stroke-dasharray: 800;
-      stroke-dashoffset: 800;
-      animation: growVine 6s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 12px var(--neon-purple));
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawVine 5s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 8px var(--neon-purple));
     }
 
-    @keyframes growVine {
-      0% { stroke-dashoffset: 800; opacity: 0; }
+    @keyframes drawVine {
+      0% { stroke-dashoffset: 1000; opacity: 0; }
       20% { opacity: 1; }
       100% { stroke-dashoffset: 0; opacity: 1; }
     }
 
-    /* VECTOR FLOWER & HEART BLOOMING ANIMATION */
-    .bloom-svg {
+    /* BLOOMING VECTOR FLOWER & HEART CLUSTERS */
+    .bloom-cluster {
       position: absolute;
-      width: 180px;
-      height: 180px;
+      width: 160px;
+      height: 160px;
       opacity: 0;
-      transform: scale(0.3);
-      animation: bloomIn 6s ease-in-out infinite alternate;
+      transform: scale(0.2);
+      animation: bloomOrganic 5s ease-in-out infinite alternate;
     }
 
-    .flower-pos { bottom: 30px; left: 40px; animation-delay: 0.5s; }
-    .heart-pos { top: 40px; right: 40px; animation-delay: 1s; }
+    .cluster-left { bottom: 20px; left: 30px; animation-delay: 0.5s; }
+    .cluster-right { top: 20px; right: 30px; animation-delay: 1s; }
 
-    @keyframes bloomIn {
-      0% { transform: scale(0.3) rotate(-15deg); opacity: 0; filter: drop-shadow(0 0 2px rgba(0,0,0,0)); }
-      50% { opacity: 0.8; }
-      100% { transform: scale(1.1) rotate(5deg); opacity: 1; filter: drop-shadow(0 0 20px var(--kuromi-hotpink)); }
+    @keyframes bloomOrganic {
+      0% { transform: scale(0.2) rotate(-10deg); opacity: 0; }
+      50% { opacity: 0.85; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 15px var(--kuromi-hotpink)); }
     }
 
-    /* Vector petals and leaf styling */
-    .vector-petal {
-      fill: rgba(244, 114, 182, 0.65);
-      stroke: var(--kuromi-hotpink);
-      stroke-width: 3;
-      transition: all 0.5s;
-    }
-
-    .vector-center {
-      fill: #f3e8ff;
-      stroke: var(--neon-purple);
-      stroke-width: 3;
-    }
-
-    .vector-heart {
-      fill: rgba(255, 73, 219, 0.7);
-      stroke: #ffffff;
-      stroke-width: 3;
-      filter: drop-shadow(0 0 10px var(--kuromi-hotpink));
-    }
-
-    .vector-leaf {
-      fill: rgba(192, 132, 252, 0.5);
+    .v-leaf {
+      fill: rgba(192, 132, 252, 0.6);
       stroke: var(--neon-purple);
       stroke-width: 2;
+    }
+
+    .v-petal {
+      fill: rgba(244, 114, 182, 0.7);
+      stroke: var(--kuromi-hotpink);
+      stroke-width: 2.5;
+    }
+
+    .v-center {
+      fill: #ffffff;
+      stroke: var(--neon-purple);
+      stroke-width: 2.5;
+    }
+
+    .v-heart {
+      fill: rgba(255, 73, 219, 0.75);
+      stroke: #ffffff;
+      stroke-width: 2.5;
+      filter: drop-shadow(0 0 8px var(--kuromi-hotpink));
     }
 
     /* CLICK / TOUCH HEART BURST EFFECT */
@@ -341,27 +339,29 @@
 </head>
 <body>
 
-  <!-- BACKGROUND VECTOR VINES, FLOWERS, AND HEARTS -->
+  <!-- BACKGROUND ORGANIC VINES AND BLOOMING FLOWER / HEART CLUSTERS -->
   <div class="garden-bg">
-    <!-- Vine Stem Drawing Background -->
+    <!-- Branching Vine Stems -->
     <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-      <path class="vine-stem" d="M 50,1000 Q 200,700 100,500 T 300,200 Q 400,100 200,0" />
-      <path class="vine-stem" d="M 950,1000 Q 800,700 900,500 T 700,200 Q 600,100 800,0" style="animation-delay: 3s;" />
+      <path class="organic-vine" d="M 50,1000 Q 120,800 80,650 Q 40,500 150,350 Q 250,200 100,50" />
+      <path class="organic-vine" d="M 950,1000 Q 880,800 920,650 Q 960,500 850,350 Q 750,200 900,50" style="animation-delay: 2.5s;" />
     </svg>
 
-    <!-- Blooming Vector Flower Graphic -->
-    <svg class="bloom-svg flower-pos" viewBox="0 0 200 200">
-      <path class="vector-leaf" d="M 90,140 Q 50,160 30,130 Q 50,110 90,140 Z" />
-      <path class="vector-petal" d="M 100,70 Q 130,30 100,20 Q 70,30 100,70 Z" />
-      <path class="vector-petal" d="M 100,130 Q 130,170 100,180 Q 70,170 100,130 Z" />
-      <path class="vector-petal" d="M 70,100 Q 30,130 20,100 Q 30,70 70,100 Z" />
-      <path class="vector-petal" d="M 130,100 Q 170,130 180,100 Q 170,70 130,100 Z" />
-      <circle class="vector-center" cx="100" cy="100" r="22" />
+    <!-- Bottom Left Blooming Flower Cluster with Leaf and Stem integration -->
+    <svg class="bloom-cluster cluster-left" viewBox="0 0 200 200">
+      <path class="v-leaf" d="M 80,130 Q 30,140 20,100 Q 50,100 80,130 Z" />
+      <path class="v-leaf" d="M 110,140 Q 150,170 170,140 Q 140,110 110,140 Z" />
+      <path class="v-petal" d="M 100,60 C 130,20 130,80 100,90 C 70,80 70,20 100,60 Z" />
+      <path class="v-petal" d="M 100,120 C 130,160 130,100 100,90 C 70,100 70,160 100,120 Z" />
+      <path class="v-petal" d="M 60,90 C 20,60 80,60 90,90 C 80,120 20,120 60,90 Z" />
+      <path class="v-petal" d="M 140,90 C 180,60 120,60 110,90 C 120,120 180,120 140,90 Z" />
+      <circle class="v-center" cx="100" cy="90" r="18" />
     </svg>
 
-    <!-- Blooming Vector Heart Graphic -->
-    <svg class="bloom-svg heart-pos" viewBox="0 0 200 200">
-      <path class="vector-heart" d="M 100,160 C 100,160 40,115 40,75 C 40,45 65,30 90,45 C 100,52 100,65 100,65 C 100,65 100,52 110,45 C 135,30 160,45 160,75 C 160,115 100,160 100,160 Z" />
+    <!-- Top Right Blooming Heart Cluster -->
+    <svg class="bloom-cluster cluster-right" viewBox="0 0 200 200">
+      <path class="v-leaf" d="M 90,150 Q 40,170 30,130 Q 60,120 90,150 Z" />
+      <path class="v-heart" d="M 100,140 C 100,140 45,100 45,65 C 45,40 68,25 90,40 C 100,48 100,60 100,60 C 100,60 100,48 110,40 C 132,25 155,40 155,65 C 155,100 100,140 100,140 Z" />
     </svg>
   </div>
 
