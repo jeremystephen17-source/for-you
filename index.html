@@ -8,7 +8,7 @@
   <style>
     :root {
       --bg-dark: #07020e;
-      --card-bg: rgba(18, 7, 28, 0.85);
+      --card-bg: rgba(18, 7, 28, 0.88);
       --pastel-purple: #e9d5ff;
       --neon-purple: #c084fc;
       --kuromi-pink: #f472b6;
@@ -29,8 +29,8 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 45%),
-        radial-gradient(circle at 80% 80%, rgba(244, 114, 182, 0.15) 0%, transparent 45%);
+        radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(244, 114, 182, 0.18) 0%, transparent 45%);
       color: #f3e8ff;
       min-height: 100vh;
       display: flex;
@@ -41,8 +41,8 @@
       position: relative;
     }
 
-    /* BACKGROUND TRACING VINE, FLOWER, AND HEART SVG */
-    .bg-svg-container {
+    /* FULLSCREEN VECTOR GARDEN BACKGROUND */
+    .garden-bg {
       position: fixed;
       top: 0;
       left: 0;
@@ -52,49 +52,68 @@
       pointer-events: none;
     }
 
-    .drawing-path {
+    /* VINE STEM DRAWING ANIMATION */
+    .vine-stem {
       fill: none;
-      stroke-width: 3.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 1400;
-      stroke-dashoffset: 1400;
-      animation: traceEffect 10s ease-in-out infinite;
-    }
-
-    /* Left Vine & Flower */
-    .path-left-vine {
       stroke: var(--neon-purple);
-      animation-delay: 0s;
-      filter: drop-shadow(0 0 10px var(--neon-purple));
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 800;
+      stroke-dashoffset: 800;
+      animation: growVine 6s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 12px var(--neon-purple));
     }
 
-    /* Right Vine & Heart */
-    .path-right-heart {
+    @keyframes growVine {
+      0% { stroke-dashoffset: 800; opacity: 0; }
+      20% { opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+
+    /* VECTOR FLOWER & HEART BLOOMING ANIMATION */
+    .bloom-svg {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      opacity: 0;
+      transform: scale(0.3);
+      animation: bloomIn 6s ease-in-out infinite alternate;
+    }
+
+    .flower-pos { bottom: 30px; left: 40px; animation-delay: 0.5s; }
+    .heart-pos { top: 40px; right: 40px; animation-delay: 1s; }
+
+    @keyframes bloomIn {
+      0% { transform: scale(0.3) rotate(-15deg); opacity: 0; filter: drop-shadow(0 0 2px rgba(0,0,0,0)); }
+      50% { opacity: 0.8; }
+      100% { transform: scale(1.1) rotate(5deg); opacity: 1; filter: drop-shadow(0 0 20px var(--kuromi-hotpink)); }
+    }
+
+    /* Vector petals and leaf styling */
+    .vector-petal {
+      fill: rgba(244, 114, 182, 0.65);
       stroke: var(--kuromi-hotpink);
-      animation-delay: 5s;
+      stroke-width: 3;
+      transition: all 0.5s;
+    }
+
+    .vector-center {
+      fill: #f3e8ff;
+      stroke: var(--neon-purple);
+      stroke-width: 3;
+    }
+
+    .vector-heart {
+      fill: rgba(255, 73, 219, 0.7);
+      stroke: #ffffff;
+      stroke-width: 3;
       filter: drop-shadow(0 0 10px var(--kuromi-hotpink));
     }
 
-    @keyframes traceEffect {
-      0% {
-        stroke-dashoffset: 1400;
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      60% {
-        stroke-dashoffset: 0; /* Fully drawn line */
-        opacity: 1;
-      }
-      85% {
-        opacity: 1;
-      }
-      100% {
-        stroke-dashoffset: -1400; /* Wipes clean to loop */
-        opacity: 0;
-      }
+    .vector-leaf {
+      fill: rgba(192, 132, 252, 0.5);
+      stroke: var(--neon-purple);
+      stroke-width: 2;
     }
 
     /* CLICK / TOUCH HEART BURST EFFECT */
@@ -322,14 +341,27 @@
 </head>
 <body>
 
-  <!-- BACKGROUND SELF-DRAWING VINE INTO FLOWER AND HEART -->
-  <div class="bg-svg-container">
+  <!-- BACKGROUND VECTOR VINES, FLOWERS, AND HEARTS -->
+  <div class="garden-bg">
+    <!-- Vine Stem Drawing Background -->
     <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-      <!-- Left side: Vine twisting up and blossoming into a Flower shape -->
-      <path class="drawing-path path-left-vine" d="M 50,950 Q 150,750 80,600 T 200,400 Q 280,300 200,200 Q 120,100 200,50 Q 280,10 240,80 Q 200,150 250,200 Q 300,250 200,400" />
-      
-      <!-- Right side: Vine twisting up and blossoming into a Heart shape -->
-      <path class="drawing-path path-right-heart" d="M 950,950 Q 850,750 920,600 T 800,400 Q 720,300 800,200 C 850,150 920,180 920,250 C 920,320 800,420 800,420 C 800,420 680,320 680,250 C 680,180 750,150 800,200" />
+      <path class="vine-stem" d="M 50,1000 Q 200,700 100,500 T 300,200 Q 400,100 200,0" />
+      <path class="vine-stem" d="M 950,1000 Q 800,700 900,500 T 700,200 Q 600,100 800,0" style="animation-delay: 3s;" />
+    </svg>
+
+    <!-- Blooming Vector Flower Graphic -->
+    <svg class="bloom-svg flower-pos" viewBox="0 0 200 200">
+      <path class="vector-leaf" d="M 90,140 Q 50,160 30,130 Q 50,110 90,140 Z" />
+      <path class="vector-petal" d="M 100,70 Q 130,30 100,20 Q 70,30 100,70 Z" />
+      <path class="vector-petal" d="M 100,130 Q 130,170 100,180 Q 70,170 100,130 Z" />
+      <path class="vector-petal" d="M 70,100 Q 30,130 20,100 Q 30,70 70,100 Z" />
+      <path class="vector-petal" d="M 130,100 Q 170,130 180,100 Q 170,70 130,100 Z" />
+      <circle class="vector-center" cx="100" cy="100" r="22" />
+    </svg>
+
+    <!-- Blooming Vector Heart Graphic -->
+    <svg class="bloom-svg heart-pos" viewBox="0 0 200 200">
+      <path class="vector-heart" d="M 100,160 C 100,160 40,115 40,75 C 40,45 65,30 90,45 C 100,52 100,65 100,65 C 100,65 100,52 110,45 C 135,30 160,45 160,75 C 160,115 100,160 100,160 Z" />
     </svg>
   </div>
 
