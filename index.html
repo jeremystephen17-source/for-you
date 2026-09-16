@@ -7,14 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
   <style>
     :root {
-      --kuromi-dark: #05010a;
       --kuromi-purple: #130620;
       --kuromi-pastel: #e9d5ff;
       --kuromi-pink: #f472b6;
       --kuromi-hotpink: #ff49db;
       --neon-purple: #c084fc;
-      --neon-glow: #e879f9;
-      --card-bg: rgba(14, 6, 22, 0.75);
+      --card-bg: rgba(14, 6, 22, 0.72);
     }
 
     * {
@@ -29,7 +27,7 @@
     }
 
     body {
-      background-color: var(--kuromi-dark);
+      background-color: #05010a;
       color: #f3e8ff;
       min-height: 100vh;
       display: flex;
@@ -40,14 +38,15 @@
       position: relative;
     }
 
-    /* HIGH-VISIBILITY VIDEO BACKGROUND */
+    /* FULLSCREEN FIXED VIDEO BACKGROUND */
     .video-background-wrapper {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -3;
+      z-index: -999;
+      pointer-events: none;
       overflow: hidden;
       background: #000000;
     }
@@ -56,22 +55,19 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
+      width: 100vw;
+      height: 100vh;
       transform: translate(-50%, -50%);
-      object-fit: cover;
-      /* Boosted brightness & saturation so the background vines shine bright */
-      filter: brightness(1.35) contrast(1.3) saturate(1.4);
+      object-fit: cover; /* Forces the video to cover the entire screen completely */
+      filter: brightness(1.4) contrast(1.3) saturate(1.4);
     }
 
-    /* LIGHTER OVERLAY SO VIDEO IS CLEARLY SEEN */
+    /* LIGHT ATMOSPHERIC GLOW SO TEXT REMAINS READABLE */
     .video-overlay-glow {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% 30%, rgba(192, 132, 252, 0.08) 0%, rgba(5, 1, 10, 0.25) 90%);
-      z-index: -2;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: radial-gradient(circle at 50% 40%, rgba(192, 132, 252, 0.05) 0%, rgba(5, 1, 10, 0.35) 90%);
+      z-index: -998;
       pointer-events: none;
     }
 
@@ -113,13 +109,13 @@
       100% { opacity: 0; transform: scale(0.6) translateY(-50px) rotate(20deg); }
     }
 
-    /* MAIN CONTAINER */
+    /* MAIN CONTAINER WITH SEMI-TRANSPARENT BACKGROUND */
     .container {
       max-width: 680px;
       width: 100%;
       background: var(--card-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 2px solid rgba(192, 132, 252, 0.55);
       border-radius: 36px;
       padding: 40px 22px 35px 22px;
@@ -301,7 +297,7 @@
 </head>
 <body>
 
-  <!-- VIDEO BACKGROUND LAYER -->
+  <!-- FULLSCREEN BACKGROUND VIDEO -->
   <div class="video-background-wrapper">
     <video autoplay loop muted playsinline id="bg-video">
       <source src="background.mp4" type="video/mp4">
@@ -367,7 +363,6 @@
     }
 
     function openSecretModal() {
-      document.getElementById('secretModalstyle').style.display = 'flex';
       document.getElementById('secretModal').style.display = 'flex';
     }
 
@@ -391,7 +386,7 @@
     }
     setInterval(createFadingHeart, 350);
 
-    const heartSymbols = ['💖', '💜', '✨', '🎀', '💀'];
+    const heartSymbols = ['💖', '💜', '✨', '🎀',];
     function spawnHeart(x, y) {
       const heart = document.createElement('div');
       heart.className = 'tap-heart';
