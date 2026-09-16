@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For My Favorite Person 💜</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Kuromi's Special World 🖤💜</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0f0717;
-      --card-bg: rgba(26, 11, 46, 0.75);
-      --purple-accent: #b967ff;
-      --purple-pink: #d946ef;
-      --neon-glow: #a855f7;
-      --text-light: #f3e8ff;
-      --text-muted: #c084fc;
+      --kuromi-dark: #12091c;
+      --kuromi-purple: #2a163d;
+      --kuromi-pastel: #d8b4fe;
+      --kuromi-pink: #f472b6;
+      --kuromi-accent: #c084fc;
+      --card-bg: rgba(35, 17, 52, 0.85);
+      --border-pink: #ec4899;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Fredoka', sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at top center, #240a40 0%, var(--bg-dark) 80%);
-      color: var(--text-light);
+      background: radial-gradient(circle at center, #2e1065 0%, var(--kuromi-dark) 90%);
+      color: #f3e8ff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -35,162 +35,180 @@
       position: relative;
     }
 
-    /* Animated background glow circles */
-    .glow-orb {
+    /* Floating Sparkles & Kuromi Aesthetic Orbs */
+    .sparkle {
       position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(185, 103, 255, 0.25) 0%, rgba(0,0,0,0) 70%);
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.4) 0%, rgba(0,0,0,0) 70%);
       border-radius: 50%;
       z-index: 0;
-      filter: blur(40px);
-      animation: floatOrb 8s infinite alternate ease-in-out;
+      filter: blur(35px);
+      animation: floatSparkle 6s infinite alternate ease-in-out;
     }
-    .orb-1 { top: -50px; left: -50px; }
-    .orb-2 { bottom: 50px; right: -50px; }
+    .sp-1 { width: 350px; height: 350px; top: -50px; left: -80px; }
+    .sp-2 { width: 300px; height: 300px; bottom: 50px; right: -60px; }
 
-    @keyframes floatOrb {
+    @keyframes floatSparkle {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(30px) scale(1.1); }
+      100% { transform: translateY(25px) scale(1.1); }
     }
 
-    /* Main Card Shell */
+    /* Main Container Shell */
     .container {
-      max-width: 650px;
+      max-width: 680px;
       width: 100%;
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(185, 103, 255, 0.3);
-      border-radius: 28px;
-      padding: 40px 25px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(185, 103, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 3px solid var(--kuromi-pink);
+      border-radius: 32px;
+      padding: 35px 20px;
+      box-shadow: 0 0 35px rgba(236, 72, 153, 0.35), inset 0 0 15px rgba(192, 132, 252, 0.2);
       text-align: center;
       z-index: 1;
       position: relative;
     }
 
+    .kuromi-badge {
+      display: inline-block;
+      background: var(--kuromi-pink);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 12px var(--kuromi-pink);
+    }
+
     h1.title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 3.2rem;
-      background: linear-gradient(135deg, #ffffff, var(--purple-accent), var(--purple-pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
-      text-shadow: 0 0 20px rgba(185, 103, 255, 0.4);
+      font-family: 'Sacramento', cursive;
+      font-size: 3.8rem;
+      color: #ffffff;
+      text-shadow: 0 0 15px var(--kuromi-pastel), 0 0 25px var(--kuromi-pink);
+      margin-bottom: 5px;
     }
 
     p.subtitle {
-      color: var(--text-muted);
-      font-size: 1rem;
-      letter-spacing: 1px;
-      margin-bottom: 30px;
+      color: var(--kuromi-pastel);
+      font-size: 1.05rem;
+      margin-bottom: 25px;
     }
 
-    /* Fancy Glass Buttons */
+    /* Buttons */
     .btn-group {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 30px;
     }
 
     .custom-btn {
-      background: linear-gradient(135deg, rgba(185, 103, 255, 0.2), rgba(217, 70, 239, 0.3));
-      border: 1px solid rgba(217, 70, 239, 0.5);
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      border: 2px solid #f472b6;
       color: #fff;
-      padding: 12px 24px;
+      padding: 12px 26px;
       border-radius: 50px;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
-      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(236, 72, 153, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .custom-btn:hover {
-      transform: translateY(-3px) scale(1.03);
-      background: linear-gradient(135deg, var(--purple-accent), var(--purple-pink));
-      box-shadow: 0 6px 20px rgba(217, 70, 239, 0.5);
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(244, 114, 182, 0.6);
     }
 
-    /* Interactive Letter Container */
+    /* Letter Box */
     .letter-box {
       display: none;
-      background: rgba(15, 7, 23, 0.85);
-      border: 1px dashed var(--purple-accent);
-      border-radius: 20px;
+      background: rgba(18, 9, 28, 0.92);
+      border: 2px dashed var(--kuromi-pastel);
+      border-radius: 24px;
       padding: 25px;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
       text-align: left;
       line-height: 1.8;
       font-size: 0.98rem;
-      color: #eae0d5;
-      animation: fadeIn 0.6s ease forwards;
+      color: #f3e8ff;
+      animation: popIn 0.5s ease forwards;
+      box-shadow: inset 0 0 15px rgba(168, 85, 247, 0.2);
     }
 
     .letter-box h3 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
-      color: var(--purple-accent);
+      font-family: 'Sacramento', cursive;
+      font-size: 2.5rem;
+      color: var(--kuromi-pink);
       margin-bottom: 10px;
     }
 
-    /* Fancy Gallery Grid */
+    /* Gallery Title */
     .section-title {
-      font-size: 1.3rem;
-      color: var(--text-light);
-      margin-bottom: 20px;
+      font-size: 1.4rem;
+      color: #ffffff;
+      margin-bottom: 25px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      text-shadow: 0 0 10px var(--kuromi-pink);
     }
 
+    /* Polaroid Cute Grid (No text inside!) */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 16px;
+      gap: 18px;
     }
 
     .memory-card {
       position: relative;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
       padding: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(244, 114, 182, 0.3);
       overflow: hidden;
       transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .memory-card::before {
+      content: '💀🖤';
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 0.75rem;
+      z-index: 2;
+      opacity: 0.8;
+      background: rgba(0,0,0,0.4);
+      padding: 2px 6px;
+      border-radius: 10px;
     }
 
     .memory-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--purple-accent);
-      box-shadow: 0 10px 25px rgba(185, 103, 255, 0.3);
+      transform: translateY(-8px) rotate(-1deg);
+      border-color: var(--kuromi-pink);
+      box-shadow: 0 12px 25px rgba(244, 114, 182, 0.4);
+      background: rgba(244, 114, 182, 0.15);
     }
 
     .memory-card img {
       width: 100%;
-      height: 160px;
+      height: 165px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 14px;
+      display: block;
     }
 
-    .memory-card .caption {
-      padding: 10px 5px 5px 5px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    /* Pop-up Modal */
+    /* Modal Pop-up */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(18, 9, 28, 0.85);
       backdrop-filter: blur(8px);
       z-index: 100;
       justify-content: center;
@@ -198,30 +216,26 @@
     }
 
     .modal-content {
-      background: var(--bg-dark);
-      border: 2px solid var(--purple-pink);
+      background: var(--kuromi-purple);
+      border: 3px solid var(--kuromi-pink);
       padding: 30px;
-      border-radius: 24px;
+      border-radius: 28px;
       max-width: 400px;
       width: 90%;
       text-align: center;
-      box-shadow: 0 0 30px var(--neon-glow);
+      box-shadow: 0 0 35px var(--kuromi-pink);
       animation: popIn 0.3s ease;
     }
 
     .close-btn {
       margin-top: 20px;
-      background: var(--purple-pink);
+      background: var(--kuromi-pink);
       border: none;
       color: white;
-      padding: 8px 20px;
+      padding: 10px 24px;
       border-radius: 20px;
+      font-weight: 600;
       cursor: pointer;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10deg); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes popIn {
@@ -232,12 +246,13 @@
 </head>
 <body>
 
-  <div class="glow-orb orb-1"></div>
-  <div class="glow-orb orb-2"></div>
+  <div class="sparkle sp-1"></div>
+  <div class="sparkle sp-2"></div>
 
   <div class="container">
+    <div class="kuromi-badge">KUROMI VIBES 💀💜</div>
     <h1 class="title">Hi my baby shobe ✨</h1>
-    <p class="subtitle">Happy 5th Monthsary My Love!!! 💜</p>
+    <p class="subtitle">Happy 5th Monthsary My Love!!! 🖤</p>
 
     <!-- Buttons -->
     <div class="btn-group">
@@ -253,68 +268,38 @@
         <br><br>
         Alam ko na hindi naging madali 'tong mga past weeks natin and, honestly, kahit lagi tayong nag-aaway, I’m so grateful kasi hindi ka pa rin sumusuko sa atin. Thank you for staying, for choosing us, and for holding on even when things get tough. Ikaw at ikaw pa rin talaga. Iloveeeyousomuchhh baby ko 💜
       </p>
-      <p style="margin-top: 15px; text-align: right; font-weight: bold; color: var(--purple-accent);">
+      <p style="margin-top: 15px; text-align: right; font-weight: bold; color: var(--kuromi-pastel);">
         Forever yours ✨
       </p>
     </div>
 
-    <!-- Memory Gallery Section -->
+    <!-- Memory Gallery Section (Clean Polaroid Cards, No text below!) -->
     <div class="section-title">
-      <span>Our Cutest Moments</span> 📸
+      <span>Our Cute Moments</span> 🖤📸✨
     </div>
 
     <div class="gallery">
-      <div class="memory-card">
-        <img src="19e44c68-630c-4837-9a37-14dfc7f967db.jpg" alt="Memory 1">
-        <div class="caption">The Best Day 💜</div>
-      </div>
-      <div class="memory-card">
-        <img src="40da9cf9-076f-48c0-82c2-01337c6fa660.jpg" alt="Memory 2">
-        <div class="caption">Favorite Smile 😊</div>
-      </div>
-      <div class="memory-card">
-        <img src="5489d26b-4f38-4d7e-bafa-49961552531e.jpg" alt="Memory 3">
-        <div class="caption">Always Together ✨</div>
-      </div>
-      <div class="memory-card">
-        <img src="7920776703_10006853131_1775819140472.jpg" alt="Memory 4">
-        <div class="caption">Sweet Times 🌸</div>
-      </div>
-      <div class="memory-card">
-        <img src="86e0c11b-4d38-4b3f-b91f-6f4f8a252576.jpg" alt="Memory 5">
-        <div class="caption">Cutest Moments 💖</div>
-      </div>
-      <div class="memory-card">
-        <img src="IMG_20260613_032549_962.jpg" alt="Memory 6">
-        <div class="caption">My Happiness 🥰</div>
-      </div>
-      <div class="memory-card">
-        <img src="befd75e1-d96a-46f8-a089-7b2820b3978e.jpg" alt="Memory 7">
-        <div class="caption">Unforgettable 💜</div>
-      </div>
-      <div class="memory-card">
-        <img src="c62e2f0b-11f4-4232-a7a6-0c618d680610.jpg" alt="Memory 8">
-        <div class="caption">My Favorite Person ✨</div>
-      </div>
-      <div class="memory-card">
-        <img src="d937a043-f1b3-45df-a94d-08027779e53a.jpg" alt="Memory 9">
-        <div class="caption">Love You Always 🔮</div>
-      </div>
-      <div class="memory-card">
-        <img src="image.png" alt="Memory 10">
-        <div class="caption">Forever & Ever 💖</div>
-      </div>
+      <div class="memory-card"><img src="photo1.jpg" alt="Photo 1"></div>
+      <div class="memory-card"><img src="photo2.jpg" alt="Photo 2"></div>
+      <div class="memory-card"><img src="photo3.jpg" alt="Photo 3"></div>
+      <div class="memory-card"><img src="photo4.jpg" alt="Photo 4"></div>
+      <div class="memory-card"><img src="photo5.jpg" alt="Photo 5"></div>
+      <div class="memory-card"><img src="photo6.jpg" alt="Photo 6"></div>
+      <div class="memory-card"><img src="photo7.jpg" alt="Photo 7"></div>
+      <div class="memory-card"><img src="photo8.jpg" alt="Photo 8"></div>
+      <div class="memory-card"><img src="photo9.jpg" alt="Photo 9"></div>
+      <div class="memory-card"><img src="photo10.jpg" alt="Photo 10"></div>
     </div>
   </div>
 
   <!-- Pop-up Modal -->
   <div class="modal" id="secretModal">
     <div class="modal-content">
-      <h2 style="color: var(--purple-accent); font-family: 'Dancing Script', cursive; font-size: 2.2rem;">Surprise! 🎉</h2>
-      <p style="margin-top: 15px; color: var(--text-light); line-height: 1.6;">
+      <h2 style="color: var(--kuromi-pink); font-family: 'Sacramento', cursive; font-size: 2.8rem;">Surprise! 🎉</h2>
+      <p style="margin-top: 10px; color: #f3e8ff; line-height: 1.6;">
         You just scanned the code and found this! I love you so much! 💜✨
       </p>
-      <button class="close-btn" onclick="closeSecretModal()">Close 💜</button>
+      <button class="close-btn" onclick="closeSecretModal()">Close 🖤</button>
     </div>
   </div>
 
