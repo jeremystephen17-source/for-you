@@ -56,14 +56,8 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-20px) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(105vh) rotate(360deg);
-        opacity: 0.2;
-      }
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
     }
 
     .sparkle {
@@ -184,6 +178,7 @@
       overflow: hidden;
       transition: all 0.3s ease;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      min-height: 165px;
     }
 
     .memory-card::before {
@@ -257,7 +252,6 @@
 <body>
 
   <div id="snow-container"></div>
-
   <div class="sparkle sp-1"></div>
   <div class="sparkle sp-2"></div>
 
@@ -287,16 +281,16 @@
     </div>
 
     <div class="gallery">
-      <div class="memory-card"><img data-id="1" src="photo1.jpg" alt="Photo 1"></div>
-      <div class="memory-card"><img data-id="2" src="photo2.jpg" alt="Photo 2"></div>
-      <div class="memory-card"><img data-id="3" src="photo3.jpg" alt="Photo 3"></div>
-      <div class="memory-card"><img data-id="4" src="photo4.jpg" alt="Photo 4"></div>
-      <div class="memory-card"><img data-id="5" src="photo5.jpg" alt="Photo 5"></div>
-      <div class="memory-card"><img data-id="6" src="photo6.jpg" alt="Photo 6"></div>
-      <div class="memory-card"><img data-id="7" src="photo7.jpg" alt="Photo 7"></div>
-      <div class="memory-card"><img data-id="8" src="photo8.jpg" alt="Photo 8"></div>
-      <div class="memory-card"><img data-id="9" src="photo9.jpg" alt="Photo 9"></div>
-      <div class="memory-card"><img data-id="10" src="photo10.jpg" alt="Photo 10"></div>
+      <div class="memory-card"><img data-file="19e44c68-630c-4837-9a37-14dfc7f967db.jpg" alt="Photo 1"></div>
+      <div class="memory-card"><img data-file="40da9cf9-076f-48c0-82c2-01337c6fa660.jpg" alt="Photo 2"></div>
+      <div class="memory-card"><img data-file="5489d26b-4f38-4d7e-bafa-49961552531e.jpg" alt="Photo 3"></div>
+      <div class="memory-card"><img data-file="7920776703_10006853131_1775819140472.jpg" alt="Photo 4"></div>
+      <div class="memory-card"><img data-file="86e0c11b-4d38-4b3f-b91f-6f4f8a252576.jpg" alt="Photo 5"></div>
+      <div class="memory-card"><img data-file="IMG_20260613_032549_962.jpg" alt="Photo 6"></div>
+      <div class="memory-card"><img data-file="befd75e1-d96a-46f8-a089-7b2820b3978e.jpg" alt="Photo 7"></div>
+      <div class="memory-card"><img data-file="c62e2f0b-11f4-4232-a7a6-0c618d680610.jpg" alt="Photo 8"></div>
+      <div class="memory-card"><img data-file="d937a043-f1b3-45df-a94d-08027779e53a.jpg" alt="Photo 9"></div>
+      <div class="memory-card"><img data-file="image.png" alt="Photo 10"></div>
     </div>
   </div>
 
@@ -337,37 +331,31 @@
       flake.style.fontSize = (Math.random() * 10 + 12) + 'px';
       
       snowContainer.appendChild(flake);
-
-      setTimeout(() => {
-        flake.remove();
-      }, 7000);
+      setTimeout(() => { flake.remove(); }, 7000);
     }
-
     setInterval(createSnowflake, 300);
 
-    // Multi-fallback Smart Auto-Loader
-    const fallbackMap = {
-      "1": ["photo1.jpg", "photo1.JPG", "photo1.png", "photo1.PNG", "photo1.jpeg", "photo1.jpg.jpg", "19e44c68-630c-4837-9a37-14dfc7f967db.jpg"],
-      "2": ["photo2.jpg", "photo2.JPG", "photo2.png", "photo2.PNG", "photo2.jpeg", "photo2.jpg.jpg", "40da9cf9-076f-48c0-82c2-01337c6fa660.jpg"],
-      "3": ["photo3.jpg", "photo3.JPG", "photo3.png", "photo3.PNG", "photo3.jpeg", "photo3.jpg.jpg", "5489d26b-4f38-4d7e-bafa-49961552531e.jpg"],
-      "4": ["photo4.jpg", "photo4.JPG", "photo4.png", "photo4.PNG", "photo4.jpeg", "photo4.jpg.jpg", "7920776703_10006853131_1775819140472.jpg"],
-      "5": ["photo5.jpg", "photo5.JPG", "photo5.png", "photo5.PNG", "photo5.jpeg", "photo5.jpg.jpg", "86e0c11b-4d38-4b3f-b91f-6f4f8a252576.jpg"],
-      "6": ["photo6.jpg", "photo6.JPG", "photo6.png", "photo6.PNG", "photo6.jpeg", "photo6.jpg.jpg", "IMG_20260613_032549_962.jpg"],
-      "7": ["photo7.jpg", "photo7.JPG", "photo7.png", "photo7.PNG", "photo7.jpeg", "photo7.jpg.jpg", "befd75e1-d96a-46f8-a089-7b2820b3978e.jpg"],
-      "8": ["photo8.jpg", "photo8.JPG", "photo8.png", "photo8.PNG", "photo8.jpeg", "photo8.jpg.jpg", "c62e2f0b-11f4-4232-a7a6-0c618d680610.jpg"],
-      "9": ["photo9.jpg", "photo9.JPG", "photo9.png", "photo9.PNG", "photo9.jpeg", "photo9.jpg.jpg", "d937a043-f1b3-45df-a94d-08027779e53a.jpg"],
-      "10": ["photo10.jpg", "photo10.JPG", "photo10.png", "photo10.PNG", "photo10.jpeg", "photo10.jpg.jpg", "image.png"]
-    };
-
+    // Universal Direct Path Resolver
     document.querySelectorAll('.gallery img').forEach((img) => {
-      const id = img.dataset.id;
-      const candidates = fallbackMap[id];
-      let attemptIndex = 0;
+      const file = img.dataset.file;
+      const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+
+      // Attempt loading paths in order: relative path, root path, and raw git link
+      const paths = [
+        file,
+        `./${file}`,
+        baseUrl + file,
+        `https://raw.githubusercontent.com/jeremystephen17-source/for-you/main/${file}`,
+        `https://raw.githubusercontent.com/jeremystephen17-source/for-you/master/${file}`
+      ];
+
+      let step = 0;
+      img.src = paths[step];
 
       img.onerror = function() {
-        if (attemptIndex < candidates.length) {
-          this.src = candidates[attemptIndex];
-          attemptIndex++;
+        step++;
+        if (step < paths.length) {
+          this.src = paths[step];
         }
       };
     });
