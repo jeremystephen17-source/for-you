@@ -42,7 +42,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Fixed Background Layer for Floating Effects */
     #fx-container {
       position: fixed;
       top: 0; left: 0;
@@ -52,7 +51,6 @@
       overflow: hidden;
     }
 
-    /* Floating Particles (Snow / Emojis) */
     .particle {
       position: absolute;
       top: -30px;
@@ -103,7 +101,6 @@
       100% { transform: translateY(35px) scale(1.15); }
     }
 
-    /* Cursor Trail Effect */
     .trail-sparkle {
       position: fixed;
       pointer-events: none;
@@ -297,7 +294,6 @@
 </head>
 <body>
 
-  <!-- Floating Background Effects -->
   <div id="fx-container"></div>
   
   <div class="floating-sticker st-1">💀</div>
@@ -371,7 +367,6 @@
       document.getElementById('secretModal').style.display = 'none';
     }
 
-    /* Falling Cute Particles Generator */
     const fxContainer = document.getElementById('fx-container');
     const symbols = ['💜', '✨', '🌸', '🔮', '💀', '💖', '🖤', '🎀', '🌙'];
 
@@ -388,10 +383,10 @@
     }
     setInterval(createParticle, 220);
 
-    /* Mouse / Touch Sparkle Trail Effect */
+    
     const trailSymbols = ['✨', '💜', '💖', '🌸'];
     document.addEventListener('mousemove', (e) => {
-      if (Math.random() > 0.6) return; // Limit trail density
+      if (Math.random() > 0.6) return; 
       const trail = document.createElement('div');
       trail.className = 'trail-sparkle';
       trail.innerText = trailSymbols[Math.floor(Math.random() * trailSymbols.length)];
