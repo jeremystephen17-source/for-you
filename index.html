@@ -23,6 +23,11 @@
       font-family: 'Fredoka', sans-serif;
     }
 
+    /* Custom Cute Purple Heart Cursor */
+    body, button, a, img {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23c084fc" stroke="%23f472b6" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto !important;
+    }
+
     body {
       background: linear-gradient(135deg, #0d0514 0%, #2e1065 40%, #4c1d95 70%, #1e1b4b 100%);
       background-size: 300% 300%;
@@ -50,6 +55,31 @@
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
+    }
+
+    /* Fading Floating Purple Hearts Across Whole Page */
+    .fading-heart {
+      position: absolute;
+      user-select: none;
+      animation: floatAndFade ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.8));
+    }
+
+    @keyframes floatAndFade {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.6) rotate(-10deg);
+      }
+      30% {
+        opacity: 0.85;
+      }
+      70% {
+        opacity: 0.85;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.3) rotate(15deg);
+      }
     }
 
     .particle {
@@ -165,7 +195,6 @@
       border-radius: 50px;
       font-size: 1.05rem;
       font-weight: 600;
-      cursor: pointer;
       box-shadow: 0 6px 22px rgba(236, 72, 153, 0.5);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -285,7 +314,6 @@
       padding: 12px 28px;
       border-radius: 25px;
       font-weight: 600;
-      cursor: pointer;
       box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
     }
 
@@ -373,6 +401,7 @@
     const fxContainer = document.getElementById('fx-container');
     const symbols = ['💜', '✨', '🌸', '🔮', '💖', '🖤', '🎀', '🌙', '⭐'];
 
+    /* Falling Particles Generator */
     function createParticle() {
       const p = document.createElement('div');
       p.classList.add('particle');
@@ -386,7 +415,24 @@
     }
     setInterval(createParticle, 180);
 
-    const heartSymbols = ['💖', '💜', '✨', '🎀',];
+    /* Floating & Fading Purple Hearts Generator */
+    const purpleHearts = ['💜', '💜', '🖤', '💜', '💖'];
+    function createFadingHeart() {
+      const h = document.createElement('div');
+      h.classList.add('fading-heart');
+      h.innerText = purpleHearts[Math.floor(Math.random() * purpleHearts.length)];
+      h.style.left = Math.random() * 95 + 'vw';
+      h.style.top = Math.random() * 90 + 'vh';
+      h.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+      h.style.fontSize = (Math.random() * 16 + 18) + 'px';
+
+      fxContainer.appendChild(h);
+      setTimeout(() => { h.remove(); }, 4500);
+    }
+    setInterval(createFadingHeart, 300);
+
+    /* Tap/Click Heart Sparkle Burst */
+    const heartSymbols = ['💖', '💜', '✨', '🎀', ];
     function spawnHeart(x, y) {
       const heart = document.createElement('div');
       heart.className = 'tap-heart';
