@@ -29,8 +29,8 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 85% 85%, rgba(244, 114, 182, 0.12) 0%, transparent 50%);
+        radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 85% 85%, rgba(244, 114, 182, 0.15) 0%, transparent 50%);
       color: #f3e8ff;
       min-height: 100vh;
       display: flex;
@@ -39,6 +39,44 @@
       padding: 40px 15px;
       overflow-x: hidden;
       position: relative;
+    }
+
+    /* GENTLE FLOATING BACKGROUND SPARKLES & HEARTS (NOT DISTURBING) */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      display: block;
+      color: var(--neon-purple);
+      opacity: 0.25;
+      animation: floatParticle linear infinite;
+      user-select: none;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(105vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.35;
+      }
+      80% {
+        opacity: 0.35;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
     }
 
     /* CLICK / TOUCH HEART BURST EFFECT */
@@ -266,6 +304,9 @@
 </head>
 <body>
 
+  <!-- SUBTLE ANIMATED BACKGROUND PARTICLES -->
+  <div class="bg-particles" id="particlesContainer"></div>
+
   <div class="container">
     <div class="floating-sticker sticker-1">🎀</div>
     <div class="floating-sticker sticker-2">🖤</div>
@@ -319,6 +360,21 @@
   </div>
 
   <script>
+    // Generate subtle floating background sparkles/hearts automatically
+    const symbols = ['✨', '💜', '🌸', '💫', '🖤'];
+    const container = document.getElementById('particlesContainer');
+    
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.fontSize = (Math.random() * 12 + 10) + 'px';
+      p.style.animationDuration = (Math.random() * 8 + 7) + 's';
+      p.style.animationDelay = (Math.random() * 5) + 's';
+      container.appendChild(p);
+    }
+
     function toggleLetter() {
       const box = document.getElementById('letterBox');
       box.style.display = (box.style.display === 'block') ? 'none' : 'block';
